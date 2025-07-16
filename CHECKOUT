@@ -1,0 +1,194 @@
+<?php
+$host = "localhost";
+$user = "root";
+$pass = "";
+$db = "shopease_db";
+$conn = new mysqli($host, $user, $pass, $db);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$msg = "";
+$orderData = [];
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $user_name = $_POST['name'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
+    $address = $_POST['address'];
+    $order_date = $_POST['order_date'];
+    $delivery_date = $_POST['delivery_date'];
+    $payment_method = $_POST['payment_method'];
+    $card_number = $_POST['card_number'];
+
+    $stmt = $conn->prepare("INSERT INTO checkout_orders (user_name, email, phone, address, order_date, delivery_date, payment_method, card_number) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssssssss", $user_name, $email, $phone, $address, $order_date, $delivery_date, $payment_method, $card_number);
+
+    if ($stmt->execute()) {
+        $msg = "✅ Order placed successfully!";
+        $orderData = [
+            'name' => $user_name,
+            'email' => $email,
+            'phone' => $phone,
+            'address' => $address,
+            'order_date' => $order_date,
+            'delivery_date' => $delivery_date,
+            'payment_method' => $payment_method,
+            'card_number' => $card_number
+        ];
+    } else {
+        $msg = "❌ Error: " . $stmt->error;
+    }
+
+    $stmt->close();
+}
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Checkout | Shopease</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7f8;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #2e7d32;
+            margin-bottom: 20px;
+        }
+        form {
+            max-width: 600px;
+            background: white;
+            padding: 25px;
+            margin: auto;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        label {
+            display: block;
+            margin: 15px 0 5px;
+            font-weight: bold;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 12px;
+            background-color: #2e7d32;
+            color: white;
+            border: none;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #1b5e20;
+        }
+        .message {
+            text-align: center;
+            font-size: 18px;
+            color: green;
+            margin-top: 20px;
+        }
+        .back-btn {
+            display: inline-block;
+            margin-top: 10px;
+            text-align: center;
+            padding: 10px 20px;
+            background-color: #999;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+        .back-btn:hover {
+            background-color: #666;
+        }
+        .order-summary {
+            max-width: 600px;
+            margin: 30px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        .order-summary h2 {
+            margin-bottom: 15px;
+            color: #2e7d32;
+        }
+        .order-summary p {
+            margin: 8px 0;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+<h1>🛍 Checkout Page</h1>
+
+<?php if ($msg): ?>
+    <p class="message"><?= $msg ?></p>
+<?php endif; ?>
+
+<form method="POST">
+    <label>Full Name</label>
+    <input type="text" name="name" required>
+
+    <label>Email</label>
+    <input type="email" name="email" required>
+
+    <label>Phone</label>
+    <input type="text" name="phone" required>
+
+    <label>Address</label>
+    <textarea name="address" required></textarea>
+
+    <label>Order Date</label>
+    <input type="date" name="order_date" required>
+
+    <label>Delivery Date</label>
+    <input type="date" name="delivery_date" required>
+
+    <label>Payment Method</label>
+    <select name="payment_method" required>
+        <option value="">-- Select Payment Method --</option>
+        <option value="COD">Cash on Delivery</option>
+        <option value="UPI">UPI</option>
+        <option value="NetBanking">NetBanking</option>
+        <option value="GPay">GPay</option>
+        <option value="Super Money">Super Money</option>
+        <option value="Paytm">Paytm</option>
+    </select>
+
+    <label>Card/UPI Number (if applicable)</label>
+    <input type="text" name="card_number" placeholder="Optional">
+
+    <button type="submit">Place Order</button>
+    <a class="back-btn" href="index.php">⬅ Back to Home</a>
+</form>
+
+<?php if (!empty($orderData)): ?>
+    <div class="order-summary">
+        <h2>📦 Order Summary</h2>
+        <p><strong>Name:</strong> <?= htmlspecialchars($orderData['name']) ?></p>
+        <p><strong>Email:</strong> <?= htmlspecialchars($orderData['email']) ?></p>
+        <p><strong>Phone:</strong> <?= htmlspecialchars($orderData['phone']) ?></p>
+        <p><strong>Address:</strong> <?= nl2br(htmlspecialchars($orderData['address'])) ?></p>
+        <p><strong>Order Date:</strong> <?= htmlspecialchars($orderData['order_date']) ?></p>
+        <p><strong>Delivery Date:</strong> <?= htmlspecialchars($orderData['delivery_date']) ?></p>
+        <p><strong>Payment Method:</strong> <?= htmlspecialchars($orderData['payment_method']) ?></p>
+        <?php if ($orderData['card_number']): ?>
+        <p><strong>Card/UPI No:</strong> <?= htmlspecialchars($orderData['card_number']) ?></p>
+        <?php endif; ?>
+    </div>
+<?php endif; ?>
+
+</body>
+</html>
