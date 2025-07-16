@@ -1,0 +1,27 @@
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+$success = "";
+$error = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["register"])) {
+    $conn = new mysqli("localhost", "root", "", "shopease_db");
+
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $email    = trim($_POST['email']);
+    $uname    = trim($_POST['uname']);
+    $password = $_POST['password'];
+    $cpass    = $_POST['cpass'];
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $error = "Invalid email format.";
+    } elseif (!preg_match("/^[A-Za-z0-9@._-]+$/", $uname)) {
+        $error = "Username can only contain letters, numbers, and @ . _ -";
+    } elseif ($password !== $cpass) {
+        $error = "Passwords do not match.";
+    } else {
+        $stmt = $conn->prep
