@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <title>Products | Shopease</title>
+
+  <style>
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, sans-serif; }
+
+    body { background: #f4f7f8; padding: 20px; }
+
+
+
+    header {
+
+      background-color: #1e1e2f;
+
+      padding: 20px 40px;
+
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+    }
+
+
+
+    .logo {
+
+      font-size: 26px;
+
+      color: #00e676;
+
+      font-weight: bold;
+
+    }
+
+
+
+    nav a {
+
+      color: #ccc;
+
+      margin-left: 20px;
+
+      text-decoration: none;
+
+      font-size: 16px;
+
+    }
+
+
+
+    nav a:hover { color: white; }
+
+
+
+    h1 {
+
+      text-align: center;
+
+      margin: 30px 0;
+
+      color: #2c3e50;
+
+    }
+
+
+
+    .products {
+
+      display: grid;
+
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+
+      gap: 20px;
+
+      padding: 10px;
+
+    }
+
+
+
+    .product {
+
+      background: #fff;
+
+      border-radius: 8px;
+
+      padding: 15px;
+
+      text-align: center;
+
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+
+    }
+
+
+
+    .product img {
+
+      width: 100%;
+
+      height: 160px;
+
+      object-fit: cover;
+
+      border-radius: 6px;
+
+    }
+
+
+
+    .price {
+
+      color: #27ae60;
+
+      font-weight: bold;
+
+      margin: 10px 0;
+
+    }
+
+
+
+    .product button {
+
+      background: #1e90ff;
+
+      color: #fff;
+
+      padding: 8px 16px;
+
+      border: none;
+
+      border-radius: 5px;
+
+      cursor: pointer;
+
+    }
+
+
+
+    .product button:hover {
+
+      background: #006ad1;
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+
+
+  <header>
+
+    <div class="logo">🛒 Shopease</div>
+
+    <nav>
+
+      <a href="index.php">Home</a>
+
+      <a href="products.php">Products</a>
+
+      <a href="cart.php">Cart</a>
+
+      <a href="login.php">Login</a>
+
+      <a href="register5.php">Register</a>
+
+    </nav>
+
+  </header>
+
+
+
+  <h1>Browse Our Products</h1>
+
+
+
+ 
+
+    <div class="products">
+
+  <div class="product"><img src="images/product1.jpg" alt="Smartphone"><h3>Smartphone</h3><p class="price">₹22599</p><button onclick="addToCart(1, 'Smartphone', 22599)">Add to Cart</button></div>
+
+  <div class="product"><img src="images/product2.jpg" alt="T-shirt"><h3>T-shirt</h3><p class="price">₹699</p><button onclick="addToCart(2, 'T-shirt', 699)">Add to Cart</button></div>
+
+  <div class="product"><img src="images/product3.jpg" alt="Toy Car"><h3>Toy Car</h3><p class="price">₹799</p><button onclick="addToCart(3, 'Toy Car', 799)">Add to Cart</button></div>
+
+  <div class="product"><img src="images/product4.jpg" alt="Printed T-shirt"><h3>Printed T-shirt</h3><p class="price">₹899</p><button onclick="addToCart(4, 'Printed T-shirt', 899)">Add to Cart</button></div>
+
+  <div class="product"><img src="images/product5.jpg" alt="Jeans"><h3>Jeans</h3><p class="price">₹999</p><button onclick="addToCart(5, 'Jeans', 999)">Add to Cart</button></div>
+
+  <div class="product"><img src="images/product6.jpg" alt="Leather Jacket"><h3>Leather Jacket</h3><p class="price">₹1099</p><button onclick="addToCart(6, 'Leather Jacket', 1099)">Add to Cart</button></div>
+
+  <div class="product"><img src="images/product7.jpg" alt="Sunglasses"><h3>Sunglasses</h3><p class="price">₹1199</p><button onclick="addToCart(7, 'Sunglasses', 1199)">Add to Cart</button></div>
+
+  <div class="product"><img src="images/product8.jpg" alt="Shoes"><h3>Shoes</h3><p class="price">₹1299</p><button onclick="addToCart(8, 'Shoes', 1299)">Add to Cart</button></div>
+
+  <div class="product"><img src="images/product9.jpg" alt="Cap"><h3>Cap</h3><p class="price">₹1399</p><button onclick="addToCart(9, 'Cap', 1399)">Add to Cart</button></div>
+
+  <div class="product"><img src="images/product10.jpg" alt="Shirt"><h3>Shirt</h3><p class="price">₹1499</p><button onclick="addToCart(10, 'Shirt', 1499)">Add to Cart</button></div>
+
+  <div class="product"><img src="images/product11.jpg" alt="Kurti"><h3>Kurti</h3><p class="price">₹999</p><button onclick="addToCart(11, 'Kurti', 999)">Add to Cart</button></div>
+
+  <div class="product"><img src="images/product12.jpg" alt="Handbag"><h3>Handbag</h3><p class="price">₹1699</p><button onclick="addToCart(12, 'Handbag', 1699)">Add to Cart</button></div>
+
+  <div class="product"><img src="images/product13.jpg" alt="Earrings"><h3>Earrings</h3><p class="price">₹199</p><button onclick="addToCart(13, 'Earrings', 199)">Add to Cart</button></div>
+
+  <div class="product"><img src="images/product14.jpg" alt="iPhone"><h3>iPhone</h3><p class="price">₹79899</p><button onclick="addToCart(14, 'iPhone', 79899)">Add to Cart</button></div>
+
+  <div class="product"><img src="images/product15.jpg" alt="Laptop"><h3>Laptop</h3><p class="price">₹65999</p><button onclick="addToCart(15, 'Laptop', 65999)">Add to Cart</button></div>
+
+  <div class="product"><img src="images/product16.jpg" alt="Speaker"><h3>Speaker</h3><p class="price">₹2099</p><button onclick="addToCart(16, 'Speaker', 2099)">Add to Cart</button></div>
+
+  <div class="product"><img src="images/product17.jpg" alt="Smartwatch"><h3>Smartwatch</h3><p class="price">₹2199</p><button onclick="addToCart(17, 'Smartwatch', 2199)">Add to Cart</button></div>
+
+  <div class="product"><img src="images/product18.jpg" alt="Earbuds"><h3>Earbuds</h3><p class="price">₹2299</p><button onclick="addToCart(18, 'Earbuds', 2299)">Add to Cart</button></div>
+
+  <div class="product"><img src="images/product19.jpg" alt="Tablet"><h3>Tablet</h3><p class="price">₹2399</p><button onclick="addToCart(19, 'Tablet', 2399)">Add to Cart</button></div>
+
+  <div class="product"><img src="images/product20.jpg" alt="Charger"><h3>Charger</h3><p class="price">₹2499</p><button onclick="addToCart(20, 'Charger', 2499)">Add to Cart</button></div>
+
+  <div class="product"><img src="images/product21.jpg" alt="Mouse"><h3>Mouse</h3><p class="price">₹2599</p><button onclick="addToCart(21, 'Mouse', 2599)">Add to Cart</button></div>
+
+  <div class="product"><img src="images/product22.jpg" alt="Keyboard"><h3>Keyboard</h3><p class="price">₹2699</p><button onclick="addToCart(22, 'Keyboard', 2699)">Add to Cart</button></div>
+
+  <div class="product"><img src="images/product23.jpg" alt="Monitor"><h3>Monitor</h3><p class="price">₹2799</p><button onclick="addToCart(23, 'Monitor', 2799)">Add to Cart</button></div>
+
+  <div class="product"><img src="images/product24.jpg" alt="Race Car Toy"><h3>Race Car Toy</h3><p class="price">₹2899</p><button onclick="addToCart(24, 'Race Car Toy', 2899)">Add to Cart</button></div>
+
+  <div class="product"><img src="images/product25.jpg" alt="Doll"><h3>Doll</h3><p class="price">₹2999</p><button onclick="addToCart(25, 'Doll', 2999)">Add to Cart</button></div>
+
+  <div class="product"><img src="images/product26.jpg" alt="Jeep Toy"><h3>Jeep Toy</h3><p class="price">₹3099</p><button onclick="addToCart(26, 'Jeep Toy', 3099)">Add to Cart</button></div>
+
+  <div class="product"><img src="images/product27.jpg" alt="Action Figure"><h3>Action Figure</h3><p class="price">₹3199</p><button onclick="addToCart(27, 'Action Figure', 3199)">Add to Cart</button></div>
+
+  <div class="product"><img src="images/product28.jpg" alt="Chess Board"><h3>Chess Board</h3><p class="price">₹3299</p><button onclick="addToCart(28, 'Chess Board', 3299)">Add to Cart</button></div>
+
+  <div class="product"><img src="images/product29.jpg" alt="Learning Tablet"><h3>Learning Tablet</h3><p class="price">₹3399</p><button onclick="addToCart(29, 'Learning Tablet', 3399)">Add to Cart</button></div>
+
+  <div class="product"><img src="images/product30.jpg" alt="Teddy Bear"><h3>Teddy Bear</h3><p class="price">₹3499</p><button onclick="addToCart(30, 'Teddy Bear', 3499)">Add to Cart</button></div>
+
+  <div class="product"><img src="images/product31.jpg" alt="Lego Blocks"><h3>Lego Blocks</h3><p class="price">₹3599</p><button onclick="addToCart(31, 'Lego Blocks', 3599)">Add to Cart</button></div>
+
+  <div class="product"><img src="images/product32.jpg" alt="Drone"><h3>Drone</h3><p class="price">₹3699</p><button onclick="addToCart(32, 'Drone', 3699)">Add to Cart</button></div>
+
+  <div class="product"><img src="images/product33.jpg" alt="STEM Kit"><h3>STEM Kit</h3><p class="price">₹3799</p><button onclick="addToCart(33, 'STEM Kit', 3799)">Add to Cart</button></div>
+
+</div>
+
+
+
+
+
+  <script>
+
+    function addToCart(id, name, price) {
+
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+      const index = cart.findIndex(item => item.id === id);
+
+
+
+      if (index !== -1) {
+
+        cart[index].qty += 1;
+
+      } else {
+
+        cart.push({ id, name, price, qty: 1 });
+
+      }
+
+
+
+      localStorage.setItem("cart", JSON.stringify(cart));
+
+      alert(name + " added to cart!");
+
+    }
+
+  </script>
+
+
+
+</body>
+
+</html>
