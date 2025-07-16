@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ShopEase | Cart</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, sans-serif; }
+    body { background: #f9f9f9; padding: 20px; }
+
+    header {
+      background-color: #1e1e2f;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 26px;
+      color: #00e676;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: #ccc;
+      margin-left: 20px;
+      text-decoration: none;
+      font-size: 16px;
+    }
+
+    nav a:hover {
+      color: white;
+    }
+
+    h1 {
+      text-align: center;
+      margin: 30px 0;
+      color: #2c3e50;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      margin-bottom: 30px;
+    }
+
+    th, td {
+      padding: 15px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #34495e;
+      color: white;
+    }
+
+    .total {
+      text-align: right;
+      font-size: 20px;
+      margin-right: 10px;
+      font-weight: bold;
+      color: #2c3e50;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .btn:hover {
+      background-color: #c0392b;
+    }
+
+    .checkout {
+      background-color: #27ae60;
+    }
+
+    .checkout:hover {
+      background-color: #1e8449;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">🛒 Shopease</div>
+    <nav>
+      <a href="products.php">Products</a>
+      <a href="cart.php">Cart</a>
+      <a href="login.php">Login</a>
+      <a href="register5.php">Register</a>
+    </nav>
+  </header>
+
+  <h1>Your Shopping Cart</h1>
+
+  <table id="cart-table">
+    <thead>
+      <tr>
+        <th>Product Name</th>
+        <th>Unit Price</th>
+        <th>Quantity</th>
+        <th>Subtotal</th>
+        <th>Remove</th>
+      </tr>
+    </thead>
+    <tbody id="cart-body">
+      <!-- Filled by JavaScript -->
+    </tbody>
+  </table>
+
+  <p class="total" id="cart-total">Total: ₹0.00</p>
+
+  <div style="text-align: right;">
+    <button class="btn checkout" onclick="checkout()">Proceed to Checkout</button>
+    <button class="btn" onclick="clearCart()">Clear Cart</button>
+  </div>
+
+  <script>
+    function loadCart() {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const tbody = document.getElementById("cart-body");
+      const totalElem = document.getElementById("cart-total");
+      tbody.innerHTML = "";
+      let total = 0;
+
+      cart.forEach((item, index) => {
+        const subtotal = item.price * item.qty;
+        total += subtotal;
+
+        const row = `
+          <tr>
+            <td>${item.name}</td>
+            <td>₹${item.price.toFixed(2)}</td>
+            <td>${item.qty}</td>
+            <td>₹${subtotal.toFixed(2)}</td>
+            <td><button class="btn" onclick="removeItem(${index})">Remove</button></td>
+          </tr>
+        `;
+        tbody.innerHTML += row;
+      });
+
+      totalElem.innerText = "Total: ₹" + total.toFixed(2);
+    }
+
+    function removeItem(index) {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart.splice(index, 1);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      loadCart();
+    }
+
+    function clearCart() {
+      localStorage.removeItem("cart");
+      loadCart();
+    }
+
+    function checkout() {
+      window.location.href = "checkout.php";
+
+    }
+
+    // Load cart on page load
+    loadCart();
+  </script>
+<script>
+  function checkout() {
+    window.location.href = "checkout.php";
+  }
+</script>
+
+
+</body>
+</html>
